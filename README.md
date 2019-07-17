@@ -1,9 +1,71 @@
 # WePermission
-一个让权限变得更加简便的框架。
+> A project to make your permission be easy.
 
-## How to use
+## How to design
 
-- 1.定义一个权限清单（PermissionLegends）,如下：
+![流程图](https://github.com/splm/WePermission/blob/master/WePermission%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
+
+--------------------------------------
+
+## Installation
+
+[![](https://jitpack.io/v/splm/WePermission.svg)](https://jitpack.io/#splm/WePermission)
+
+> ### Gradle
+>
+> **Step 1 :  Add the JitPack repository to your build file**
+>
+> ```groovy
+> allprojects {
+> 		repositories {
+> 			...
+> 			maven { url 'https://jitpack.io' }
+> 		}
+> 	}
+> ```
+>
+> **Step 2 : Add the dependency** 
+>
+> ```groovy
+> dependencies {
+> 	        implementation 'com.github.splm:WePermission:0.0.2'
+> 	}
+> ```
+>
+>
+>
+> --------------
+>
+> ### Maven
+>
+> **Step 1 :  Add the JitPack repository to your build file **
+>
+> ```xml
+> <repositories>
+> 		<repository>
+> 		    <id>jitpack.io</id>
+> 		    <url>https://jitpack.io</url>
+> 		</repository>
+> 	</repositories>
+> ```
+>
+> **Step 2 :  Add the dependency **
+>
+> ```xml
+> <dependency>
+> 	    <groupId>com.github.splm</groupId>
+> 	    <artifactId>WePermission</artifactId>
+> 	    <version>Tag</version>
+> 	</dependency>
+> ```
+>
+>
+
+
+
+## Usage
+
+- 1.Define a permission legend(PermissionLegends)  by yourself：
 
 ```java
 public class PermissionLegends {
@@ -18,13 +80,13 @@ public class PermissionLegends {
 }
 ```
 
-- 2.在需要申请权限的地方调用如下代码：
+- 2.Add the following code into ：
 
 ```java
 WePermissions.requestPermissions(MainActivity.this, 1,PermissionLegends.Permissions);
 ```
 
-- 3.重写`onRequestPermissionsResult`方法，并调用
+- 3.Re-write`onRequestPermissionsResult`method，and call it
 
 ```java
 @Override
@@ -33,7 +95,7 @@ WePermissions.requestPermissions(MainActivity.this, 1,PermissionLegends.Permissi
     }
 ```
 
-- 4.实现`WePermissionCallback`接口，并实现以下两个方法：
+- 4.Implement`WePermissionCallback`interface，and call the following two methods：
 
 ```java
 //当用户允许授权时调用
@@ -42,7 +104,7 @@ void onRequestPermissionGranted(int requestCode, @NonNull String[] permissions, 
 void onRequestPermissionDenied(int requestCode, @NonNull String[] permissions,boolean isAllDenied);
 ```
 
-以下是两个方法完整使用样例：
+The following code is complete sample：
 
 ```java
 public void onRequestPermissionGranted(int requestCode, @NonNull String[] permissions, boolean isAllGranted) {
@@ -71,7 +133,3 @@ public void onRequestPermissionGranted(int requestCode, @NonNull String[] permis
         }
     }
 ```
-
-## How to design
-
-![流程图](https://github.com/splm/WePermission/blob/master/WePermission%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
