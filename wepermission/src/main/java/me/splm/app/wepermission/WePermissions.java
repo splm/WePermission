@@ -13,7 +13,7 @@ import java.util.List;
 
 public class WePermissions {
 
-    public static boolean hasPermissions(@NonNull Context context, @Size(min = 1) @NonNull String... perms) {
+    private static boolean hasPermissions(@NonNull Context context, @Size(min = 1) @NonNull String... perms) {
         for (String perm : perms) {
             if (ContextCompat.checkSelfPermission(context, perm) != PackageManager.PERMISSION_GRANTED) {
                 return false;
