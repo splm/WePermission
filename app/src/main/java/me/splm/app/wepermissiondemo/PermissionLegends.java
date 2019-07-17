@@ -8,5 +8,7 @@ public class PermissionLegends {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
             Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.RECORD_AUDIO};
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.READ_SMS
+    };
 }

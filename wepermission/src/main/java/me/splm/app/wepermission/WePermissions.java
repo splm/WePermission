@@ -37,8 +37,8 @@ public class WePermissions {
         if (hasPermissions(activity, perms)) {
             notifyAlreadyHasPermissions(activity, requestCode, perms);
         } else {
-//            String[] permissions = checkNoHaven(activity, perms);
-            requestSelfPermissions(activity, requestCode, perms);
+            String[] permissions = checkNoHaven(activity, perms);
+            requestSelfPermissions(activity, requestCode, permissions);
         }
     }
 
@@ -52,27 +52,32 @@ public class WePermissions {
 
     public static void onRequestPermissionResult(Activity receiver, int requestCode, int[] grantedResults, String... perms) {
         List<String> granteds = new ArrayList<>();
-        List<String> dennieds = new ArrayList<>();
+        List<String> denieds = new ArrayList<>();
         for (int i = 0; i < grantedResults.length; i++) {
             if (grantedResults[i] == PackageManager.PERMISSION_GRANTED) {
-                granteds.add(perms[i]);
+                if(perms[i] != null) granteds.add(perms[i]);
             } else {
-                dennieds.add(perms[i]);
+                if(perms[i] != null) denieds.add(perms[i]);
             }
         }
 
         if (receiver instanceof WePermissionCallback) {
             WePermissionCallback callback = (WePermissionCallback) receiver;
+            //部分权限被允许
             if (!granteds.isEmpty() && granteds.size() < perms.length) {
-                callback.onRequestPermissionGranted(requestCode, perms, false);
+                callback.onRequestPermissionGranted(requestCode, granteds.toArray(new String[]{}), false);
             }
-
-            if (!dennieds.isEmpty()) {
-                callback.onRequestPermissionDennied(requestCode, perms);
+            //部分权限被拒绝
+            if(!denieds.isEmpty() && denieds.size()<perms.length){
+                callback.onRequestPermissionDenied(requestCode, denieds.toArray(new String[]{}),false);
             }
-
-            if (!granteds.isEmpty() && dennieds.isEmpty()) {
-                callback.onRequestPermissionGranted(requestCode, perms, true);
+            //全部权限被拒绝
+            if (!denieds.isEmpty() && granteds.isEmpty()) {
+                callback.onRequestPermissionDenied(requestCode, denieds.toArray(new String[]{}),true);
+            }
+            //全部权限被允许
+            if (!granteds.isEmpty() && denieds.isEmpty()) {
+                callback.onRequestPermissionGranted(requestCode, granteds.toArray(new String[]{}), true);
             }
         }
     }
