@@ -3,7 +3,7 @@
 
 ## How to design
 
-![流程图](https://github.com/splm/WePermission/blob/master/WePermission%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
+![流程图](https://github.com/splm/WePermission/blob/master/WePermission-flow.png)
 
 --------------------------------------
 
