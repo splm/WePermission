@@ -38,7 +38,7 @@
 >
 > ### Maven
 >
-> **Step 1 :  Add the JitPack repository to your build file **
+> **Step 1 : Add the JitPack repository to your build file**
 >
 > ```xml
 > <repositories>
@@ -49,7 +49,7 @@
 > 	</repositories>
 > ```
 >
-> **Step 2 :  Add the dependency **
+> **Step 2 :  Add the dependency**
 >
 > ```xml
 > <dependency>
